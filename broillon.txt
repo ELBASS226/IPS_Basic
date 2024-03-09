@@ -1,0 +1,17 @@
+#self.performance_vitesse_int = models.Bareme.get_performance_valid("vitesse", self.performance_vitesse_str)
+#print(self.performance_vitesse_int)
+#self.performance_saut_int = models.Bareme.get_performance_valid("longueur", self.performance_saut_str)
+#print(self.performance_saut_int)
+
+                BoxLayout:
+                    size_hint: 1, None
+                    height: "30dp"
+                    Label:
+                        text: root.message_erreur
+                        size_hint: 1, None
+                        height: "30dp"
+                        text_size: self.size
+                        halign: "center"
+                        valign: "center"
+                        font_size: "15dp"
+                        color: color_error
