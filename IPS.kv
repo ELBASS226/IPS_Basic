@@ -10,195 +10,204 @@ MenuPrincipal:
     canvas:
         Rectangle:
             size: self.width, self.height
-    BoxLayout:
-        orientation: "vertical"
-        size_hint: .90, .90
-        spacing: "5dp"
-        pos_hint: {"center_x": .5}
-        Header:
-        BoxLayout:
-            orientation: "vertical"
-            size_hint: None, None
-            width: "350dp"
-            height: "610dp"
-            spacing: "5dp"
-            pos_hint: {"center_x": .5}
-            #==================================================================================================
-            #  CONTENU PRINCIPAL DE L'APPLICATION
-            #==================================================================================================
-            #Affichons deux boutons permettant de choisir le sexe:
-            BoxLayout:
-                size_hint: 1, None
-                height: "70dp"
-                orientation: "vertical"
-                BoxLayout:
-                    size_hint: 1, None
-                    height: "30dp"
-                    Label:
-                        text: "Veuillez choisir le sexe de l'athlète."
-                        color: 0, .0, .0, 1
-                        size_hint: 1, None
-                        text_size: self.size
-                        halign: "center"
-                        valign: "center"
-                        font_size: "15dp"
-            BoxLayout:
-                orientation: "horizontal"
-
-                ToggleButton:
-                    size_hint:.5, None
-                    height: "50dp"
-                    text: "Fille"
-                    state: root.sexe_feminin_state
-                    on_state: root.get_athlete_sexe(self)
-                    background_normal:""
-                    background_color: color_off if root.sexe_feminin_state else color_off
-                ToggleButton:
-                    size_hint:.5, None
-                    height: "50dp"
-                    text: "Garçon"
-                    state: root.sexe_masculin_state
-                    on_state: root.get_athlete_sexe(self)
-                    background_normal:""
-                    background_color: color_on
-            #---------------------------------------------------------------------------------------------------------
-            #Choix de la tranche d'âge :
-            BoxLayout:
-                size_hint:1, None
-                height: "150dp"
-                orientation: "vertical"
-                spacing: "10dp"
-                ToggleButton:
-                    #size_hint: 1, None
-                    text: "Moins de 12 ans"
-                    state: root.tranche1_state
-                    on_state: root.get_athlete_age_tranche(self, 1)
-                    background_normal:""
-                    background_color: btn_choix_tranche_color
-                ToggleButton:
-                    #size_hint: 1, None
-                    text: "12, 13 ou 14 ans" if root.sex_fille else "12, 13, 14 ou 15 ans"
-                    state: root.tranche2_state
-                    on_state: root.get_athlete_age_tranche(self, 2)
-                    background_normal:""
-                    background_color: btn_choix_tranche_color
-                ToggleButton:
-                    #size_hint: 1, None
-                    text: "Plus de 14 ans" if root.sex_fille else "Plus de 15 ans"
-                    state: root.tranche3_state
-                    on_state: root.get_athlete_age_tranche(self, 3)
-                    background_normal:""
-                    background_color: btn_choix_tranche_color
-            #----------------------------------------------------------------------------------------------------------
-            #Saisie des performances:
-            BoxLayout:
-                size_hint: 1, None
-                height: "50dp"
-                Label:
-                    text: "Saisie des performances:"
-                    text_size: self.size
-                    halign: "center"
-                    valign: "center"
-                    font_size: "18dp"
-                    color: .5, .5, .5, 1
-            BoxLayout:
-                orientation: "horizontal"
-                spacing: "20dp"
-                size_hint: 1, None
-                height: "80dp"
+    StackLayout:
+        TabbedPanel:
+            tab_pos:'bottom_left'
+            do_default_tab: False
+            TabbedPanelItem:
+                text: "Mode avancé"
+            TabbedPanelItem:
+                text: "Mode Basic"
                 BoxLayout:
                     orientation: "vertical"
-                    Label:
-                        text: "Vitesse"
-                        text_size: self.size
-                        halign: "left"
-                        valign: "center"
-                        font_size: "18dp"
-                        color: .1, .1, .8, 1
-                    TextInput:
-                        size_hint: 1, None
-                        height: "45dp"
-                        font_size: "25dp"
-                        multiline: False
-                        input_type: 'number'
-                        on_text: root.get_performance_saisie(self, "vitesse"); root.auto_insert_apostroph("vitesse")
-                        text: root.performance_vitesse_str
-                BoxLayout:
-                    orientation: "vertical"
-                    Label:
-                        text: "Saut en longueur"
-                        text_size: self.size
-                        halign: "left"
-                        valign: "center"
-                        font_size: "18dp"
-                        color: .1, .1, .8, 1
-                    TextInput:
-                        size_hint: 1, None
-                        height: "45dp"
-                        font_size: "25dp"
-                        forground_color:'#FF0000'
-                        multiline: False
-                        on_text: root.get_performance_saisie(self, "longueur"); root.auto_insert_apostroph("longueur")
-                        text: root.performance_saut_str
-
-            #----------------------------------------------------------------------------------------------------------
-            #Affichage du résultat
-            BoxLayout:
-                orientation: "vertical"
-                size_hint: 1, None
-                height: "150dp"
-                Label:
-                    text: "Résultat de l'interprétation"  if not (root.note_vitesse == '0') else "Vous devez rentrer la erformance de l'athlète \n en vitess et en saut pui clicker sur 'Interpréter!"
-                    color: .2, .2, .2, 1
-                BoxLayout:
-                    orientation: "vertical"
-                    size_hint: 1, None
-                    height: "80dp"
+                    size_hint: .90, .90
+                    spacing: "5dp"
+                    pos_hint: {"center_x": .5}
+                    Header:
                     BoxLayout:
-                        Label:
-                            text: "Note de Saut: " + root.note_vitesse + "/20" if not (root.note_vitesse == '0') else ""
-                            color: .2, .2, .2, 1
-                        Label:
-                            text: "Note de Saut: " + root.note_longueur + "/20" if not (root.note_longueur == '0') else ""
-                            color: .2, .2, .2, 1
+                        orientation: "vertical"
+                        size_hint: None, None
+                        width: "350dp"
+                        height: "610dp"
+                        spacing: "5dp"
+                        pos_hint: {"center_x": .5}
+                        #==================================================================================================
+                        #  CONTENU PRINCIPAL DE L'APPLICATION
+                        #==================================================================================================
+                        #Affichons deux boutons permettant de choisir le sexe:
+                        BoxLayout:
+                            size_hint: 1, None
+                            height: "70dp"
+                            orientation: "vertical"
+                            BoxLayout:
+                                size_hint: 1, None
+                                height: "30dp"
+                                Label:
+                                    text: "Veuillez choisir le sexe de l'athlète."
+                                    color: 0, .0, .0, 1
+                                    size_hint: 1, None
+                                    text_size: self.size
+                                    halign: "center"
+                                    valign: "center"
+                                    font_size: "15dp"
+                        BoxLayout:
+                            orientation: "horizontal"
+
+                            ToggleButton:
+                                size_hint:.5, None
+                                height: "50dp"
+                                text: "Fille"
+                                state: root.sexe_feminin_state
+                                on_state: root.get_athlete_sexe(self)
+                                background_normal:""
+                                background_color: color_off if root.sexe_feminin_state else color_off
+                            ToggleButton:
+                                size_hint:.5, None
+                                height: "50dp"
+                                text: "Garçon"
+                                state: root.sexe_masculin_state
+                                on_state: root.get_athlete_sexe(self)
+                                background_normal:""
+                                background_color: color_on
+                        #---------------------------------------------------------------------------------------------------------
+                        #Choix de la tranche d'âge :
+                        BoxLayout:
+                            size_hint:1, None
+                            height: "150dp"
+                            orientation: "vertical"
+                            spacing: "10dp"
+                            ToggleButton:
+                                #size_hint: 1, None
+                                text: "Moins de 12 ans"
+                                state: root.tranche1_state
+                                on_state: root.get_athlete_age_tranche(self, 1)
+                                background_normal:""
+                                background_color: btn_choix_tranche_color
+                            ToggleButton:
+                                #size_hint: 1, None
+                                text: "12, 13 ou 14 ans" if root.sex_fille else "12, 13, 14 ou 15 ans"
+                                state: root.tranche2_state
+                                on_state: root.get_athlete_age_tranche(self, 2)
+                                background_normal:""
+                                background_color: btn_choix_tranche_color
+                            ToggleButton:
+                                #size_hint: 1, None
+                                text: "Plus de 14 ans" if root.sex_fille else "Plus de 15 ans"
+                                state: root.tranche3_state
+                                on_state: root.get_athlete_age_tranche(self, 3)
+                                background_normal:""
+                                background_color: btn_choix_tranche_color
+                        #----------------------------------------------------------------------------------------------------------
+                        #Saisie des performances:
+                        BoxLayout:
+                            size_hint: 1, None
+                            height: "50dp"
+                            Label:
+                                text: "Saisie des performances:"
+                                text_size: self.size
+                                halign: "center"
+                                valign: "center"
+                                font_size: "18dp"
+                                color: .5, .5, .5, 1
+                        BoxLayout:
+                            orientation: "horizontal"
+                            spacing: "20dp"
+                            size_hint: 1, None
+                            height: "80dp"
+                            BoxLayout:
+                                orientation: "vertical"
+                                Label:
+                                    text: "Vitesse"
+                                    text_size: self.size
+                                    halign: "left"
+                                    valign: "center"
+                                    font_size: "18dp"
+                                    color: .1, .1, .8, 1
+                                TextInput:
+                                    size_hint: 1, None
+                                    height: "45dp"
+                                    font_size: "25dp"
+                                    multiline: False
+                                    input_type: 'number'
+                                    on_text: root.get_performance_saisie(self, "vitesse"); root.auto_insert_apostroph("vitesse")
+                                    text: root.performance_vitesse_str
+                            BoxLayout:
+                                orientation: "vertical"
+                                Label:
+                                    text: "Saut en longueur"
+                                    text_size: self.size
+                                    halign: "left"
+                                    valign: "center"
+                                    font_size: "18dp"
+                                    color: .1, .1, .8, 1
+                                TextInput:
+                                    size_hint: 1, None
+                                    height: "45dp"
+                                    font_size: "25dp"
+                                    forground_color:'#FF0000'
+                                    multiline: False
+                                    on_text: root.get_performance_saisie(self, "longueur"); root.auto_insert_apostroph("longueur")
+                                    text: root.performance_saut_str
+
+                        #----------------------------------------------------------------------------------------------------------
+                        #Affichage du résultat
+                        BoxLayout:
+                            orientation: "vertical"
+                            size_hint: 1, None
+                            height: "150dp"
+                            Label:
+                                text: "Résultat de l'interprétation"  if not (root.note_vitesse == '0') else "Vous devez rentrer la erformance de l'athlète \n en vitess et en saut pui clicker sur 'Interpréter!"
+                                color: .2, .2, .2, 1
+                            BoxLayout:
+                                orientation: "vertical"
+                                size_hint: 1, None
+                                height: "80dp"
+                                BoxLayout:
+                                    Label:
+                                        text: "Note de Saut: " + root.note_vitesse + "/20" if not (root.note_vitesse == '0') else ""
+                                        color: .2, .2, .2, 1
+                                    Label:
+                                        text: "Note de Saut: " + root.note_longueur + "/20" if not (root.note_longueur == '0') else ""
+                                        color: .2, .2, .2, 1
+                                BoxLayout:
+                                    Label:
+                                        text: "Total: " + root.total_note + "/40" if not (root.total_note == '0') else ""
+                                        color: .2, .2, .2, 1
+                                        font_size: "25dp"
+                                    Label:
+                                        text: "Moyenne: " + root.moyenne_sur_10 + "/10" if not (root.moyenne_sur_10 == '0') else ""
+                                        color: .7, .2, .9, 1
+                                        font_size: "25dp"
+                        #----------------------------------------------------------------------------------------------------------
+                        #Boutton interpréter
+                        BoxLayout:
+                            size_hint: 1, None
+                            height: "60dp"
+                            Button:
+                                text: "Interpréter"
+                                on_press: root.interpreter()
+                                color: .1, .2, .9, 1
+                                background_normal:""
+                                background_color: "#00C0FF"
+            #======================================================================================================================
+                        #FIN DU CONTENU DE L'APPLICATION
+            #======================================================================================================================
                     BoxLayout:
+                        size_hint: 1, None
+                        height: "50dp"
+                        canvas:
+                            Color:
+                                rgb: .1, .8, .3
+                            Rectangle:
+                                size: self.width, dp(40)
                         Label:
-                            text: "Total: " + root.total_note + "/40" if not (root.total_note == '0') else ""
-                            color: .2, .2, .2, 1
-                            font_size: "25dp"
-                        Label:
-                            text: "Moyenne: " + root.moyenne_sur_10 + "/10" if not (root.moyenne_sur_10 == '0') else ""
-                            color: .7, .2, .9, 1
-                            font_size: "25dp"
-            #----------------------------------------------------------------------------------------------------------
-            #Boutton interpréter
-            BoxLayout:
-                size_hint: 1, None
-                height: "60dp"
-                Button:
-                    text: "Interpréter"
-                    on_press: root.interpreter()
-                    background_normal:""
-                    background_color: "#0000FF"
-#======================================================================================================================
-            #FIN DU CONTENU DE L'APPLICATION
-#======================================================================================================================
-        BoxLayout:
-            size_hint: 1, None
-            height: "50dp"
-            canvas:
-                Color:
-                    rgb: .1, .8, .3
-                Rectangle:
-                    size: self.width, dp(40)
-            Label:
-                text: root.copy
-                size_hint: 1, None
-                height: "40dp"
-                text_size: self.size
-                halign: "center"
-                valign: "center"
-                font_size: "10dp"
+                            text: root.copy
+                            size_hint: 1, None
+                            height: "40dp"
+                            text_size: self.size
+                            halign: "center"
+                            valign: "center"
+                            font_size: "10dp"
 
 <Header>:
     orientation: "vertical"

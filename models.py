@@ -55,14 +55,20 @@ class Connexion:
 class Bareme:
     def __init__(self, id_barem, p_course, p_saut, note_garcon_tranche1, note_garcon_tranche2,
                  note_garcon_tranche3, note_fille_tranche1, note_fille_tranche2, note_fille_tranche3):
-        self.id = id_barem; self.P_Course = p_course; self.P_Saut = p_saut
-        self.NoteG_T1 = note_garcon_tranche1; self.NoteG_T2 = note_garcon_tranche2; self.NoteG_T3 = note_garcon_tranche3
-        self.NoteF_T1 = note_fille_tranche1; self.NoteF_T2 = note_fille_tranche2; self.NoteF_T3 = note_fille_tranche3
+        self.id = id_barem
+        self.P_Course = p_course
+        self.P_Saut = p_saut
+        self.NoteG_T1 = note_garcon_tranche1
+        self.NoteG_T2 = note_garcon_tranche2
+        self.NoteG_T3 = note_garcon_tranche3
+        self.NoteF_T1 = note_fille_tranche1
+        self.NoteF_T2 = note_fille_tranche2
+        self.NoteF_T3 = note_fille_tranche3
     
     # Méthode permettant d'ajouter une performance dans la table des barèmes
     def ajouter(self):
-        req = f"INSERT INTO TBaremes (id,P_Course,P_Saut,NoteG_T1,NoteG_T2,NoteG_T3," +\
-              f"NoteF_T1,NoteF_T2,NoteF_T3) Values({self.id},'{self.P_Course}', '{self.P_Course}',"+\
+        req = f"INSERT INTO TBaremes (id, P_Course, P_Saut, NoteG_T1, NoteG_T2, NoteG_T3," +\
+              f"NoteF_T1, NoteF_T2, NoteF_T3) Values({self.id},'{self.P_Course}', '{self.P_Course}',"+\
               f"{self.NoteG_T1}, {self.NoteG_T2}, {self.NoteG_T3}, {self.NoteF_T1}, {self.NoteF_T2}, {self.NoteF_T3})"
         if Connexion.execut_sql(req):
             pass
